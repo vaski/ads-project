@@ -1,0 +1,3 @@
+== ADS Project
+
+The project was created to show my Ruby on Rails skills.
