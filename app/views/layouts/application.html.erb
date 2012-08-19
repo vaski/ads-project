@@ -3,12 +3,21 @@
 <head>
   <%= render 'layouts/head' %>
 </head>
-<body class="container">
+<body>
   <%= render 'layouts/navbar' %>
-  <%= render 'layouts/flash_notice' %>
+  <div class="container">
+    <%= render 'layouts/flash_notice' %>
 
-  <%= yield %>
+    <section id="main-content">
+      <%= yield %>
+    </section>
 
-  <%= debug(params) if Rails.env.development? %>
+    <footer class="footer">
+      <p class="pull-right"><%= link_to "Back to top", "#" %></p>
+      <p><%= link_to "ADS project", root_path %></p>
+
+      <%= render 'layouts/debug' %>
+    </footer>
+  </div>
 </body>
 </html>

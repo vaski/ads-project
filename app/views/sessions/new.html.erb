@@ -10,7 +10,7 @@
   <%= f.input :password,  :required => false %>
   <div class="form-actions">
     <%= f.button :submit, 'Sign in', :class => 'btn btn-primary' %>
-    <%= link_to 'Cancel', root_path, :class => 'btn' %>
+    <%= link_to 'Cancel', root_path, :class => 'btn btn-danger' %>
   </div>
   <% end %>
   <p>New user? <%= link_to "Sign up now!", signup_path %></p>

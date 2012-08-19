@@ -1,6 +1,9 @@
 <% provide(:title, 'Home') %>
+<% if !signed_in? %>
 <div class="center hero-unit">
   <h1>Welcome to the ADS project</h1>
   <h2>sign up if you don't have an account</h2>
   <%= link_to "Sign up", signup_path , class: "btn btn-large btn-primary" %>
 </div>
+<% end %>
+<h1>ADS list</h1>
