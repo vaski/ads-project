@@ -22,5 +22,5 @@ class Ad < ActiveRecord::Base
 
   validates :user_id, presence: true
 
-  default_scope :order => 'ads.created_at DESC'
+  default_scope order: 'ads.created_at DESC'
 end

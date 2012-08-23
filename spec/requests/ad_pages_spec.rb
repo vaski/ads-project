@@ -7,29 +7,49 @@ describe "Ad pages" do
   before { sign_in user }
 
   describe "ad creation" do
-    before { visit user_path(user) }
+    before { visit new_ad_path }
 
     describe "with invalid information" do
       it "should not create an ad" do
-        expect { click_button "Create" }.should_not change(Ad, :count)
+        expect { click_button "Create Ad" }.not_to change(Ad, :count)
       end
 
-      describe "error message" do
-        before { click_button "Create" }
-        it { should have_content('error') }
+      describe "should have error message" do
+        before { click_button "Create Ad" }
+        it { should have_content('Ad not created!') }
       end
     end
 
     describe "with valid information" do
 
       before do
-       fill_in "Lorem ipsum", with: ad.title
-       fill_in "Lorem ipsum dolor", with: ad.description
+        fill_in 'ad_title', with: "Unique title for unique ad"
+        fill_in 'ad_description', with: "Lorem ipsum dolor"
       end
 
       it "should create an ad" do
-        expect { click_button "Create" }.should change(Ad, :count).by(1)
+        expect { click_button "Create Ad" }.to change(Ad, :count).by(1)
       end
+
+      describe "should have message" do
+        before { click_button "Create Ad" }
+        it { should have_content('Ad created!') }
+      end
+
+      describe "should have ad content" do
+        before { click_button "Create Ad" }
+        it { should have_content('Unique title for unique ad') }
+      end
+
+      describe "should redirect to current user page" do
+        before { click_button "Create Ad" }
+        it { should have_content( user.name ) }
+      end
+    end
+
+    describe "when click cancel button" do
+      before { click_link "Cancel" }
+      it { should have_content( user.name ) }
     end
   end
 end

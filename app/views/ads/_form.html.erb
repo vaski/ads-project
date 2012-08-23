@@ -1,0 +1,13 @@
+<%= simple_form_for @ad, html: { class: 'form-horizontal' } do |f| %>
+  <fieldset>
+    <legend><h1>Create new ad</h1></legend>
+
+    <%= f.input :title, required: false %>
+    <%= f.input :description, required: false %>
+
+    <div class="form-actions">
+      <%= f.button :submit, class: 'btn-primary' %>
+      <%= link_to 'Cancel', user_path(id: current_user.id), class: 'btn btn-danger' %>
+    </div>
+  </fieldset>
+<% end %>

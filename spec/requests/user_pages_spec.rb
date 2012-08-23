@@ -65,6 +65,7 @@ describe "User pages" do
 
     it { should have_selector('h1', text: user.name) }
     it { should have_selector('title', text: user.name) }
+    it { should have_selector('a', text: "Create new ad!") }
 
     describe "ads" do
       it { should have_content(ad1.title) }
