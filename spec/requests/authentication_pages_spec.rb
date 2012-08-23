@@ -36,4 +36,22 @@ describe "Authentication" do
     it { should have_selector('h1', text: 'Sign in') }
     it { should have_selector('title', text: 'Sign in') }
   end
+
+  describe "authorization" do
+    describe "for non-signed-in users" do
+      let(:user) { FactoryGirl.create(:user) }
+
+      describe "in the Ads controller" do
+        describe "submitting to the create action" do
+          before { post ads_path }
+          specify { response.should redirect_to(signin_path) }
+        end
+
+        describe "submitting to the destroy action" do
+          before { delete ad_path(FactoryGirl.create(:ad)) }
+          specify { response.should redirect_to(signin_path) }
+        end
+      end
+    end
+  end
 end

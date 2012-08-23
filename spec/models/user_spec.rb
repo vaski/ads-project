@@ -29,6 +29,7 @@ describe User do
   it { should respond_to(:password_confirmation) }
   it { should respond_to(:remember_token) }
   it { should respond_to(:authenticate) }
+  it { should respond_to(:ads) }
 
   it { should be_valid }
 
@@ -132,5 +133,27 @@ describe User do
   describe "remember token" do
     before { @user.save }
     its(:remember_token) { should_not be_blank }
+  end
+
+  describe "ad associations" do
+    before { @user.save }
+    let!(:older_ad) do
+      FactoryGirl.create(:ad, user: @user, created_at: 1.day.ago)
+    end
+    let!(:newer_ad) do
+      FactoryGirl.create(:ad, user: @user, created_at: 1.hour.ago)
+    end
+
+    it "should have the right ads in the right order" do
+      @user.ads.should == [newer_ad, older_ad]
+    end
+
+    it "should destroy associated ads" do
+      ads = @user.ads
+      @user.destroy
+      ads.each do |ad|
+        Ad.find_by_id(ad.id).should be_nil
+      end
+    end
   end
 end

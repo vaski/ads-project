@@ -58,9 +58,20 @@ describe "User pages" do
 
   describe "Profile page" do
     let(:user) { FactoryGirl.create(:user) }
+    let!(:ad1) { FactoryGirl.create(:ad, user: user, title: "First Ad", description: "Lorem ipsum") }
+    let!(:ad2) { FactoryGirl.create(:ad, user: user, title: "Second Ad", description: "Sed nisi ligula") }
+
     before { visit user_path(user) }
 
     it { should have_selector('h1', text: user.name) }
     it { should have_selector('title', text: user.name) }
+
+    describe "ads" do
+      it { should have_content(ad1.title) }
+      it { should have_content(ad1.description) }
+      it { should have_content(ad2.title) }
+      it { should have_content(ad2.description) }
+      it { should have_content(user.ads.count) }
+    end
   end
 end

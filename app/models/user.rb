@@ -15,6 +15,8 @@ class User < ActiveRecord::Base
   attr_accessible :email, :name, :password, :password_confirmation
   has_secure_password
 
+  has_many :ads, dependent: :destroy
+
   before_save { self.email.downcase! }
   before_save :create_remember_token
 
@@ -27,6 +29,7 @@ class User < ActiveRecord::Base
                     uniqueness: { case_sensitive: false }
 
   validates :password, presence: true,
+                       confirmation: true,
                        length: { minimum: 6 }
 
   validates :password_confirmation, presence: true
