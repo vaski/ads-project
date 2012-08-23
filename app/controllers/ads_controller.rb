@@ -1,5 +1,6 @@
 class AdsController < ApplicationController
-  before_filter :signed_in_user
+  before_filter :signed_in_user, only: [:create, :destroy]
+  before_filter :correct_user, only: :destroy
 
   def new
     @ad = current_user.ads.build if signed_in?
@@ -17,6 +18,14 @@ class AdsController < ApplicationController
   end
 
   def destroy
+    @ad.destroy
+    redirect_to current_user
+  end
 
+  private
+
+  def correct_user
+    @ad = current_user.ads.find_by_id(params[:id])
+    redirect_to current_user if @ad.nil?
   end
 end

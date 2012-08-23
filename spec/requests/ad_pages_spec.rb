@@ -52,4 +52,16 @@ describe "Ad pages" do
       it { should have_content( user.name ) }
     end
   end
+
+  describe "ad destruction" do
+    before { FactoryGirl.create(:ad, user: user) }
+
+      describe "as correct user" do
+      before { visit user_path(id: user.id) }
+
+      it "should delete a ad" do
+        expect { click_link "delete" }.to change(Ad, :count).by(-1)
+      end
+    end
+  end
 end

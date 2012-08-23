@@ -1,5 +1,11 @@
 <div class="adslist <%= cycle('list-odd', 'list-even' ) %>">
   <h3><%= ad.title %></h3>
   <%= simple_format ad.description %>
+  <% if current_user?(ad.user) %>
+    <%= link_to "delete", ad, method: :delete,
+                              data: { confirm: "You sure?" },
+                              title: ad.title,
+                              class: "pull-right" %>
+  <% end %>
   <p>Created <%= time_ago_in_words(ad.created_at) %> ago.</p>
 </div>
