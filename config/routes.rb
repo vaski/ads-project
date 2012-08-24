@@ -3,7 +3,7 @@ AdsProject::Application.routes.draw do
 
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
-  resources :ads, only: [:new, :edit, :create, :update, :destroy]
+  resources :ads, except: :show
 
   match '/signup', to: 'users#new'
   match '/signin', to: 'sessions#new'

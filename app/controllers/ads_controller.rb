@@ -38,7 +38,9 @@ class AdsController < ApplicationController
   private
 
   def correct_user
-    @ad = current_user.ads.find_by_id(params[:id])
-    redirect_to current_user if @ad.nil?
+    @ad = current_user.ads.find(params[:id])
+  rescue
+    render(file: File.join(Rails.root, 'public/422.html'), status: 403,
+                                                           layout: false)
   end
 end
