@@ -1,9 +1,12 @@
 class AdsController < ApplicationController
-  before_filter :signed_in_user, only: [:create, :destroy]
-  before_filter :correct_user, only: :destroy
+  before_filter :signed_in_user
+  before_filter :correct_user, only: [ :edit, :update, :destroy ]
 
   def new
-    @ad = current_user.ads.build if signed_in?
+    @ad = current_user.ads.build
+  end
+
+  def edit
   end
 
   def create
@@ -14,6 +17,16 @@ class AdsController < ApplicationController
     else
       flash.now[:error] = "Ad not created!"
       render 'new'
+    end
+  end
+
+  def update
+    if @ad.update_attributes(params[:ad])
+      flash[:success] = "Ad updated!"
+      redirect_to current_user
+    else
+      flash.now[:error] = "Ad not updated!"
+      render 'edit'
     end
   end
 

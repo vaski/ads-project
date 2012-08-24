@@ -12,7 +12,7 @@
   <% @ads.each do |ad| %>
     <div class="adslist <%= cycle('list-odd', 'list-even' ) %>">
       <h3><%= ad.title %></h3>
-      <%= simple_format ad.description %>
+       <p><%= ad.description %></p>
       <p>
         Created <%= time_ago_in_words(ad.created_at) %> ago
         by <%= ad.user.name %>
