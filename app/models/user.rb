@@ -9,10 +9,12 @@
 #  updated_at      :datetime         not null
 #  password_digest :string(255)
 #  remember_token  :string(255)
+#  role            :string(255)      default("user")
 #
 
 class User < ActiveRecord::Base
   attr_accessible :email, :name, :password, :password_confirmation
+
   has_secure_password
 
   has_many :ads, dependent: :destroy
@@ -33,6 +35,12 @@ class User < ActiveRecord::Base
                        length: { minimum: 6 }
 
   validates :password_confirmation, presence: true
+
+  ROLES = %w[user admin]
+
+  def role?(role)
+    ROLES.include? role.to_s
+  end
 
   private
 

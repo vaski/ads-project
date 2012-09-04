@@ -1,10 +1,15 @@
 <% provide(:title, @user.name) %>
+<div>
+  <h1 class="header"><%= @user.name %></h1>
+</div>
 <div class="row">
   <div class="span6">
-    <h1><%= @user.name %></h1>
+    <%= render partial: 'user_info' %>
   </div>
   <div class="span6">
-    <div class="center hero-unit">
+    <h3 class="center">New Ad</h3>
+    <div class="center hero-unit hero-ad">
+      <p>For create new ad push the button</p>
       <%= link_to "Create new ad!", new_ad_path, class: "btn btn-large btn-primary" %>
     </div>
   </div>
@@ -12,7 +17,6 @@
 <div class="row">
   <div class="span12">
      <% if @user.ads.any? %>
-       <h3 class="pull-right">Ads (<%= @user.ads.count %>)</h3>
          <%= render @ads %>
        <%= will_paginate @ads %>
      <% end %>
