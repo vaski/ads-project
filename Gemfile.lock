@@ -33,8 +33,8 @@ GEM
       rake
     arel (3.0.2)
     bcrypt-ruby (3.0.1)
-    bootstrap-sass (2.0.4.1)
-    bootstrap-will_paginate (0.0.7)
+    bootstrap-sass (2.0.4.2)
+    bootstrap-will_paginate (0.0.8)
       will_paginate
     builder (3.0.0)
     cancan (1.6.8)
@@ -67,7 +67,7 @@ GEM
       i18n (~> 0.4)
     ffi (1.1.5)
     hike (1.2.1)
-    i18n (0.6.0)
+    i18n (0.6.1)
     journey (1.0.4)
     jquery-rails (2.1.1)
       railties (>= 3.1.0, < 5.0)
@@ -146,9 +146,9 @@ GEM
       polyglot
       polyglot (>= 0.3.1)
     tzinfo (0.3.33)
-    uglifier (1.2.7)
+    uglifier (1.3.0)
       execjs (>= 0.3.0)
-      multi_json (~> 1.3)
+      multi_json (~> 1.0, >= 1.0.2)
     will_paginate (3.0.3)
     xpath (0.1.4)
       nokogiri (~> 1.3)
