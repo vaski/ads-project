@@ -30,6 +30,7 @@ describe User do
   it { should respond_to(:password_confirmation) }
   it { should respond_to(:remember_token) }
   it { should respond_to(:authenticate) }
+  it { should respond_to(:role) }
   it { should respond_to(:ads) }
 
   it { should be_valid }
@@ -156,5 +157,10 @@ describe User do
         Ad.find_by_id(ad.id).should be_nil
       end
     end
+  end
+
+  describe "with default role" do
+    before { @user.save }
+    it { @user.role.should == 'user' }
   end
 end
