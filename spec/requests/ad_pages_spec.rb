@@ -4,7 +4,7 @@ describe "Ad pages" do
   subject { page }
 
   let(:user) { FactoryGirl.create(:user) }
-  before { sign_in user }
+  before { user_sign_in user }
 
   describe "ad creation" do
     before { visit new_ad_path }

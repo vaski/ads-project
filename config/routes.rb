@@ -1,13 +1,11 @@
 AdsProject::Application.routes.draw do
-  root to: 'pages#home'
 
-  resources :users
-  resources :sessions, only: [:new, :create, :destroy]
-  resources :ads, except: :show
+  devise_for :users, path_prefix: 'my'
 
-  match '/signup', to: 'users#new'
-  match '/signin', to: 'sessions#new'
-  match '/signout', to: 'sessions#destroy', via: :delete
+  resources :users, only: [:show, :index, :destroy]
+  resources :ads
+
+  root to: 'ads#index'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

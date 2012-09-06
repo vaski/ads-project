@@ -2,49 +2,34 @@
 #
 # Table name: users
 #
-#  id              :integer          not null, primary key
-#  name            :string(255)
-#  email           :string(255)
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
-#  password_digest :string(255)
-#  remember_token  :string(255)
-#  role            :string(255)      default("user")
+#  id                     :integer          not null, primary key
+#  email                  :string(255)      default(""), not null
+#  encrypted_password     :string(255)      default(""), not null
+#  reset_password_token   :string(255)
+#  reset_password_sent_at :datetime
+#  remember_created_at    :datetime
+#  sign_in_count          :integer          default(0)
+#  current_sign_in_at     :datetime
+#  last_sign_in_at        :datetime
+#  current_sign_in_ip     :string(255)
+#  last_sign_in_ip        :string(255)
+#  created_at             :datetime         not null
+#  updated_at             :datetime         not null
+#  name                   :string(255)
 #
 
 class User < ActiveRecord::Base
-  attr_accessible :email, :name, :password, :password_confirmation
+  # Include default devise modules. Others available are:
+  # :token_authenticatable, :confirmable,
+  # :lockable, :timeoutable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable
 
-  has_secure_password
+  # Setup accessible (or protected) attributes for your model
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :name
+  # attr_accessible :title, :body
 
   has_many :ads, dependent: :destroy
 
-  before_save { self.email.downcase! }
-  before_save :create_remember_token
-
-  validates :name, presence: true,
-                   length: { maximum: 50 }
-
-  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-  validates :email, presence: true,
-                    format: { with: VALID_EMAIL_REGEX },
-                    uniqueness: { case_sensitive: false }
-
-  validates :password, presence: true,
-                       confirmation: true,
-                       length: { minimum: 6 }
-
-  validates :password_confirmation, presence: true
-
-  ROLES = %w[user admin]
-
-  def role?(role)
-    ROLES.include? role.to_s
-  end
-
-  private
-
-    def create_remember_token
-      self.remember_token = SecureRandom.urlsafe_base64
-    end
+  validates :name, presence: true, length: { maximum: 50 }
 end

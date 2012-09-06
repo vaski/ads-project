@@ -1,14 +1,17 @@
-<div class="adslist <%= cycle('list-odd', 'list-even' ) %>">
-  <h3><%= ad.title %></h3>
-  <%= ad.description %>
-  <% if current_user?(ad.user) %>
-    <span class="pull-right">
-    <%= link_to "update", edit_ad_path(ad), class: 'btn btn-mini btn-primary'  %>
-    <%= link_to "delete", ad, method: :delete,
-                              data: { confirm: "You sure?" },
-                              title: ad.title,
-                              class: 'btn btn-mini btn-danger' %>
-    </span>
-  <% end %>
-  <p>Created <%= time_ago_in_words(ad.created_at) %> ago.</p>
-</div>
+<tr>
+  <td>
+    <h3><%= link_to ad.title, ad_path(ad) %></h3>
+    <p><%= ad.description %></p>
+    <p>
+      Created by <%= ad.user.name %> <%= time_ago_in_words(ad.created_at) %> ago.
+    </p>
+    <p>
+      <% if can? :update, ad %>
+        <%= link_to "update", edit_ad_path(ad), class: 'btn btn-mini btn-primary'  %>
+      <% end %>
+      <% if can? :destroy, ad %>
+        <%= link_to "delete", ad, method: :delete, data: { confirm: "You sure?" }, title: ad.title, class: 'btn btn-mini btn-danger' %>
+      <% end %>
+    </p>
+  </td>
+</tr>

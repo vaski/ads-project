@@ -1,0 +1,20 @@
+<% provide(:title, 'Edit') %>
+<div class="row">
+  <h1>Edit account</h1>
+
+  <div class="span6 offset3">
+    <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+
+    <div class="form-inputs">
+      <%= f.input :email, required: false, autofocus: true, input_html: { class: 'span6' } %>
+      <%= f.input :password, label: "New password (leave it blank if you don't want to change it)", autocomplete: "off", required: false, input_html: { class: 'span6' } %>
+      <%= f.input :password_confirmation, label: 'New password confirmation', required: false, input_html: { class: 'span6' } %>
+      <%= f.input :current_password, label: "Current password (need for confirm you changes)", required: false, input_html: { class: 'span6' }  %>
+    </div>
+
+    <%= f.button :submit, "Update", class: 'btn-primary' %>
+    <%= link_to 'Delete', registration_path(resource_name), data: { confirm: "Are you sure want to delete your account?" }, method: :delete, class: 'btn btn-danger' %>
+    <%= link_to 'Cancel', root_path, class: 'btn' %>
+  <% end %>
+  </div>
+</div>

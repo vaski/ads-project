@@ -1,9 +1,14 @@
 class AdsController < ApplicationController
-  before_filter :signed_in_user
-  before_filter :correct_user, only: [ :edit, :update, :destroy ]
+  load_and_authorize_resource
+
+  def index
+    @ads = Ad.paginate(page: params[:page])
+  end
+
+  def show
+  end
 
   def new
-    @ad = current_user.ads.build
   end
 
   def edit
@@ -21,6 +26,7 @@ class AdsController < ApplicationController
   end
 
   def update
+    @ad = Ad.find(params[:id])
     if @ad.update_attributes(params[:ad])
       flash[:success] = "Ad updated!"
       redirect_to current_user
@@ -32,15 +38,7 @@ class AdsController < ApplicationController
 
   def destroy
     @ad.destroy
+    flash[:notice] = "Successfuly destroyed article."
     redirect_to current_user
-  end
-
-  private
-
-  def correct_user
-    @ad = current_user.ads.find(params[:id])
-  rescue
-    render(file: File.join(Rails.root, 'public/422.html'), status: 403,
-                                                           layout: false)
   end
 end

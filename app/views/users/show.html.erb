@@ -1,7 +1,5 @@
 <% provide(:title, @user.name) %>
-<div>
-  <h1 class="header"><%= @user.name %></h1>
-</div>
+<h1 class="header"><%= @user.name %></h1>
 <div class="row">
   <div class="span6">
     <%= render partial: 'user_info' %>
@@ -14,12 +12,17 @@
     </div>
   </div>
 </div>
+
+<% if @user.ads.any? %>
 <div class="row">
-  <h2 class="center">List of ads</h2>
   <div class="span12">
-     <% if @user.ads.any? %>
-         <%= render @ads %>
-       <%= will_paginate @ads %>
-     <% end %>
+    <h2 class="center">List of ads</h2>
+    <% @ads.each do |ad| %>
+      <table class="table">
+        <%= render ad %>
+      </table>
+    <% end %>
+    <%= will_paginate @ads %>
   </div>
 </div>
+<% end %>

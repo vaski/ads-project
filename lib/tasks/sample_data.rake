@@ -6,10 +6,10 @@ namespace :db do
                            email: "admin@ads.com",
                            password: "foobar",
                            password_confirmation: "foobar",
-                           role: "admin"}, without_protection: true)
-    @admin.save
+                           role: "admin"},
+                           without_protection: true)
 
-    50.times do |n|
+    5.times do |n|
       name = Faker::Name.name
       email = "email-#{n+1}@ads.com"
       password = "password"

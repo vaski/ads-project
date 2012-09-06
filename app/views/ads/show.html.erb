@@ -1,0 +1,17 @@
+<% provide(:title, @ad.title) %>
+<div class="row">
+  <div class="span6 offset3">
+    <h1><%= @ad.title %></h1>
+    <p><%= @ad.description %></p>
+    <p>Created by <%= @ad.user.name %> <%= time_ago_in_words(@ad.created_at) %> ago.</p>
+    <p>
+      <% if can? :update, @ad %>
+        <%= link_to "update", edit_ad_path(@ad), class: 'btn btn-primary'  %>
+      <% end %>
+      <% if can? :destroy, @ad %>
+        <%= link_to "delete", @ad, method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger' %>
+      <% end %>
+    </p>
+
+  </div>
+</div>

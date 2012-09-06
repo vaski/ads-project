@@ -1,0 +1,20 @@
+<% provide(:title, 'Sign in') %>
+<div class="row">
+  <h1>Sign in</h1>
+
+  <div class="span6 offset3">
+    <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+
+    <div class="form-inputs">
+      <%= f.input :email, required: false, autofocus: true, input_html: { class: 'span6' } %>
+      <%= f.input :password, required: false, input_html: { class: 'span6' } %>
+      <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+    </div>
+
+    <%= f.button :submit, "Sign in", class: 'btn-primary' %>
+    <%= link_to 'Cancel', root_path, class: 'btn' %>
+    <p></p>
+    <p>New user? <%= link_to "Sign up now!", new_user_registration_path %></p>
+    <% end %>
+  </div>
+</div>

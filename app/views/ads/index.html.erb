@@ -1,0 +1,19 @@
+<% provide(:title, 'Home') %>
+<div class="row">
+  <div class="span12">
+    <% if !user_signed_in? %>
+    <div class="center hero-unit">
+      <h1>Welcome to the ADS project</h1>
+      <h2>sign up if you don't have an account</h2>
+      <%= link_to "Sign up", new_user_registration_path , class: "btn btn-large btn-primary" %>
+    </div>
+    <% end %>
+
+    <table class="table table-striped">
+    <% @ads.each do |ad| %>
+      <%= render ad %>
+    <% end %>
+    </table>
+    <%= will_paginate @ads %>
+  </div>
+</div>

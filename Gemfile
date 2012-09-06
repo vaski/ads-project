@@ -1,14 +1,14 @@
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.8'
-gem 'bcrypt-ruby', '~> 3.0.0'
+gem 'devise'
+gem 'cancan'
 
 gem 'jquery-rails'
 gem 'faker'
 gem 'bootstrap-sass'
 gem 'will_paginate', '~> 3.0'
 gem 'bootstrap-will_paginate'
-gem 'cancan'
 
 group :development, :test do
   gem 'rspec-rails', '~> 2.0'
