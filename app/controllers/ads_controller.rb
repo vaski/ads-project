@@ -38,7 +38,7 @@ class AdsController < ApplicationController
 
   def destroy
     @ad.destroy
-    flash[:notice] = "Successfuly destroyed article."
+    flash[:notice] = "Successfuly destroyed ad!"
     redirect_to current_user
   end
 end

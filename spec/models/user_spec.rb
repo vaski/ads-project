@@ -145,7 +145,7 @@ describe User do
 
   describe "when password confirmation is nil" do
     before { @user.password_confirmation = nil }
-    it { should_not be_valid }
+    it { should be_valid }
   end
 
   describe "ad associations" do

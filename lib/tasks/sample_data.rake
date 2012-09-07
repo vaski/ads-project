@@ -4,8 +4,8 @@ namespace :db do
 
     @admin = User.create!({name: "Ads Admin",
                            email: "admin@ads.com",
-                           password: "foobar",
-                           password_confirmation: "foobar",
+                           password: "password",
+                           password_confirmation: "password",
                            role: "admin"},
                            without_protection: true)
 

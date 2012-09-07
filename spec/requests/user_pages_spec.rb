@@ -11,7 +11,10 @@ describe "User pages" do
       let!(:ad1) { FactoryGirl.create(:ad, user: user, title: "First Ad", description: "Lorem ipsum") }
       let!(:ad2) { FactoryGirl.create(:ad, user: user, title: "Second Ad", description: "Sed nisi ligula") }
 
-      before { visit user_path(user) }
+      before do
+        user_sign_in(user)
+        visit user_path(user)
+      end
 
       it { should have_selector('h1', text: user.name) }
       it { should have_selector('title', text: user.name) }
@@ -27,6 +30,27 @@ describe "User pages" do
         it { should have_content(ad1.description) }
         it { should have_content(ad2.title) }
         it { should have_content(ad2.description) }
+        it { should have_selector('a', text: "update")}
+        it { should have_selector('a', text: "delete")}
+
+        describe "creating ad" do
+          before { click_link 'Create new ad!' }
+          it { should have_selector('h1', text: 'Create ad') }
+        end
+
+        describe "updating ad" do
+          before { click_link 'update' }
+          it { should have_selector('h1', text: 'Update ad') }
+        end
+
+        describe "deleting ad" do
+          before { click_link 'delete' }
+          it { should have_selector('div', text: 'Successfuly destroyed ad!' ) }
+        end
+
+        it "should delete a ad" do
+          expect { click_link 'delete' }.to change(Ad, :count).by(-1)
+        end
       end
     end
 
@@ -65,11 +89,15 @@ describe "User pages" do
       let!(:ad1) { FactoryGirl.create(:ad, user: admin, title: "First Ad", description: "Lorem ipsum") }
       let!(:ad2) { FactoryGirl.create(:ad, user: admin, title: "Second Ad", description: "Sed nisi ligula") }
 
-      before { visit user_path(admin) }
+      before do
+        user_sign_in(admin)
+        visit user_path(admin)
+      end
 
       it { should have_selector('h1', text: admin.name) }
       it { should have_selector('title', text: admin.name) }
       it { should have_selector('a', text: "Create new ad!") }
+
       it { should have_content(admin.id) }
       it { should have_content(admin.email) }
       it { should have_content(admin.role) }
@@ -80,6 +108,27 @@ describe "User pages" do
         it { should have_content(ad1.description) }
         it { should have_content(ad2.title) }
         it { should have_content(ad2.description) }
+        it { should have_selector('a', text: "update")}
+        it { should have_selector('a', text: "delete")}
+
+        describe "creating ad" do
+          before { click_link 'Create new ad!' }
+          it { should have_selector('h1', text: 'Create ad') }
+        end
+
+        describe "updating ad" do
+          before { click_link 'update' }
+          it { should have_selector('h1', text: 'Update ad') }
+        end
+
+        describe "deleting ad" do
+          before { click_link 'delete' }
+          it { should have_selector('div', text: 'Successfuly destroyed ad!' ) }
+        end
+
+        it "should delete a ad" do
+          expect { click_link 'delete' }.to change(Ad, :count).by(-1)
+        end
       end
     end
 
@@ -104,10 +153,30 @@ describe "User pages" do
 
         it "should list each user" do
           User.paginate(page: 1).each do |user|
-            page.should have_selector('td', text: user.name)
+            page.should have_selector('a', text: user.name)
           end
         end
       end
+
+      describe "deleting user" do
+        before { click_link 'Delete' }
+        it { should have_selector('div', text: 'User destroyed!') }
+      end
+
+      it "should delete a user" do
+        expect { click_link 'Delete' }.to change(User, :count).by(-1)
+      end
+
+    end
+
+    describe "Nav bar" do
+      let(:admin) { FactoryGirl.create(:admin) }
+      before do
+        user_sign_in admin
+      end
+
+      it { should have_link('Users', href: users_path) }
+
     end
   end
 end
