@@ -19,9 +19,13 @@ describe Ad do
 
   subject { @ad }
 
+  it { should respond_to(:id) }
   it { should respond_to(:title) }
   it { should respond_to(:description) }
   it { should respond_to(:user_id) }
+  it { should respond_to(:created_at) }
+  it { should respond_to(:updated_at) }
+
   it { should respond_to(:user) }
   its(:user) { should == user }
 
@@ -37,13 +41,23 @@ describe Ad do
     it { should_not be_valid }
   end
 
-  describe "with blank description" do
-    before { @ad.description = " " }
+  describe "when title is nil" do
+    before { @ad.title = nil }
     it { should_not be_valid }
   end
 
   describe "with title that is too long" do
     before { @ad.title = "a" * 81 }
+    it { should_not be_valid }
+  end
+
+  describe "with blank description" do
+    before { @ad.description = " " }
+    it { should_not be_valid }
+  end
+
+  describe "when description is nil" do
+    before { @ad.title = nil }
     it { should_not be_valid }
   end
 end

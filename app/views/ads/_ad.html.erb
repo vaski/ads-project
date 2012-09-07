@@ -3,7 +3,7 @@
     <h3><%= link_to ad.title, ad_path(ad) %></h3>
     <p><%= ad.description %></p>
     <p>
-      Created by <%= ad.user.name %> <%= time_ago_in_words(ad.created_at) %> ago.
+      Created by <%= link_to ad.user.name, user_path(ad.user) %> <%= time_ago_in_words(ad.created_at) %> ago.
     </p>
     <p>
       <% if can? :update, ad %>

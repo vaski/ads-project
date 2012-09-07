@@ -16,6 +16,7 @@
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  name                   :string(255)
+#  role                   :string(255)      default("user")
 #
 
 class User < ActiveRecord::Base
@@ -32,4 +33,7 @@ class User < ActiveRecord::Base
   has_many :ads, dependent: :destroy
 
   validates :name, presence: true, length: { maximum: 50 }
+  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+  validates :email, format: { with: VALID_EMAIL_REGEX }
+  validates :password_confirmation, presence: true
 end
