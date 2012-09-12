@@ -1,9 +1,16 @@
-<%= simple_form_for @ad do |f| %>
-  <fieldset>
-    <%= f.input :title, required: false, autofocus: true, input_html: { class: 'span6' } %>
-    <%= f.input :description, required: false, input_html: { class: 'span6', rows: 5 }  %>
+<% provide(:title, controller.action_name.humanize + " ad") %>
 
-    <%= f.button :submit, class: 'btn-primary' %>
-    <%= link_to 'Cancel', user_path(id: current_user.id), class: 'btn' %>
-  </fieldset>
-<% end %>
+<div class="row">
+  <div class="span6 offset3">
+    <h1><%= controller.action_name.humanize + " ad" %></h1>
+    <%= simple_form_for @ad do |f| %>
+      <fieldset>
+        <%= f.input :title, required: false, autofocus: true, input_html: { class: "span6" } %>
+        <%= f.input :description, required: false, input_html: { class: "span6", rows: 5 }  %>
+
+        <%= f.button :submit, "Save", class: "btn-primary" %>
+        <%= link_to "Cancel", current_user, class: "btn" %>
+      </fieldset>
+    <% end %>
+  </div>
+</div>

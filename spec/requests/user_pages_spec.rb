@@ -30,17 +30,17 @@ describe "User pages" do
         it { should have_content(ad1.description) }
         it { should have_content(ad2.title) }
         it { should have_content(ad2.description) }
-        it { should have_selector('a', text: "update")}
+        it { should have_selector('a', text: "edit")}
         it { should have_selector('a', text: "delete")}
 
         describe "creating ad" do
           before { click_link 'Create new ad!' }
-          it { should have_selector('h1', text: 'Create ad') }
+          it { should have_selector('h1', text: 'New ad') }
         end
 
         describe "updating ad" do
-          before { click_link 'update' }
-          it { should have_selector('h1', text: 'Update ad') }
+          before { click_link 'edit' }
+          it { should have_selector('h1', text: 'Edit ad') }
         end
 
         describe "deleting ad" do
@@ -50,32 +50,6 @@ describe "User pages" do
 
         it "should delete a ad" do
           expect { click_link 'delete' }.to change(Ad, :count).by(-1)
-        end
-      end
-    end
-
-    describe "Index page" do
-
-      let(:user) { FactoryGirl.create(:user) }
-      before(:all) { 30.times { FactoryGirl.create(:user) } }
-      after(:all) { User.delete_all }
-
-      before(:each) do
-        user_sign_in user
-        visit users_path
-      end
-
-      it { should have_selector('title', text: 'All users') }
-      it { should have_selector('h1', text: 'All users') }
-
-      describe "pagination" do
-
-        it { should have_selector('div.pagination') }
-
-        it "should list each user" do
-          User.paginate(page: 1).each do |user|
-            page.should have_selector('td', text: user.name)
-          end
         end
       end
     end
@@ -108,17 +82,17 @@ describe "User pages" do
         it { should have_content(ad1.description) }
         it { should have_content(ad2.title) }
         it { should have_content(ad2.description) }
-        it { should have_selector('a', text: "update")}
+        it { should have_selector('a', text: "edit")}
         it { should have_selector('a', text: "delete")}
 
         describe "creating ad" do
           before { click_link 'Create new ad!' }
-          it { should have_selector('h1', text: 'Create ad') }
+          it { should have_selector('h1', text: 'New ad') }
         end
 
         describe "updating ad" do
-          before { click_link 'update' }
-          it { should have_selector('h1', text: 'Update ad') }
+          before { click_link 'edit' }
+          it { should have_selector('h1', text: 'Edit ad') }
         end
 
         describe "deleting ad" do

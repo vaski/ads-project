@@ -16,7 +16,7 @@
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  name                   :string(255)
-#  role                   :string(255)      default("user")
+#  role                   :string(255)
 #
 
 require 'spec_helper'

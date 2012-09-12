@@ -1,17 +1,25 @@
 <% provide(:title, @ad.title) %>
+
 <div class="row">
   <div class="span12">
     <h1><%= @ad.title %></h1>
     <p><%= @ad.description %></p>
-    <p>Created by <%= link_to @ad.user.name, user_path(@ad.user) %> <%= time_ago_in_words(@ad.created_at) %> ago.</p>
+    <p>
+      Created by
+      <% if can? :read, @users %>
+        <%= link_to @ad.user.name, user_path(@ad.user) %> <%= time_ago_in_words(@ad.created_at) %>
+      <% else %>
+        <%= @ad.user.name %> <%= time_ago_in_words(@ad.created_at) %>
+      <% end %>
+      ago
+    </p>
     <p>
       <% if can? :update, @ad %>
-        <%= link_to "update", edit_ad_path(@ad), class: 'btn btn-primary'  %>
+        <%= link_to "edit", edit_ad_path(@ad), class: "btn btn-primary"  %>
       <% end %>
       <% if can? :destroy, @ad %>
-        <%= link_to "delete", @ad, method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger' %>
+        <%= link_to "delete", @ad, method: :delete, data: { confirm: "You sure want to delete ad?" }, class: "btn btn-danger" %>
       <% end %>
     </p>
-
   </div>
 </div>

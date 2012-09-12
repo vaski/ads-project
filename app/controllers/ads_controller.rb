@@ -2,16 +2,7 @@ class AdsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @ads = Ad.paginate(page: params[:page])
-  end
-
-  def show
-  end
-
-  def new
-  end
-
-  def edit
+    @ads = @ads.paginate(page: params[:page])
   end
 
   def create
@@ -26,7 +17,6 @@ class AdsController < ApplicationController
   end
 
   def update
-    @ad = Ad.find(params[:id])
     if @ad.update_attributes(params[:ad])
       flash[:success] = "Ad updated!"
       redirect_to current_user

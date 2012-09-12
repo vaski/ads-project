@@ -2,15 +2,13 @@
   <td>
     <h3><%= link_to ad.title, ad_path(ad) %></h3>
     <p><%= ad.description %></p>
-    <p>
-      Created by <%= link_to ad.user.name, user_path(ad.user) %> <%= time_ago_in_words(ad.created_at) %> ago.
-    </p>
+    <p>Created <%= time_ago_in_words(ad.created_at) %> ago</p>
     <p>
       <% if can? :update, ad %>
-        <%= link_to "update", edit_ad_path(ad), class: 'btn btn-mini btn-primary'  %>
+        <%= link_to "edit", edit_ad_path(ad), class: 'btn btn-mini btn-primary'  %>
       <% end %>
       <% if can? :destroy, ad %>
-        <%= link_to "delete", ad, method: :delete, data: { confirm: "You sure?" }, title: ad.title, class: 'btn btn-mini btn-danger' %>
+        <%= link_to "delete", ad, method: :delete, data: { confirm: "You sure want to delete ad?" }, title: ad.title, class: "btn btn-mini btn-danger" %>
       <% end %>
     </p>
   </td>

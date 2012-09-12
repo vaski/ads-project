@@ -11,11 +11,11 @@ describe "Ad pages" do
 
     describe "with invalid information" do
       it "should not create an ad" do
-        expect { click_button "Create Ad" }.not_to change(Ad, :count)
+        expect { click_button "Save" }.not_to change(Ad, :count)
       end
 
       describe "should have error message" do
-        before { click_button "Create Ad" }
+        before { click_button "Save" }
         it { should have_content('Ad not created!') }
       end
     end
@@ -28,21 +28,21 @@ describe "Ad pages" do
       end
 
       it "should create an ad" do
-        expect { click_button "Create Ad" }.to change(Ad, :count).by(1)
+        expect { click_button "Save" }.to change(Ad, :count).by(1)
       end
 
       describe "should have message" do
-        before { click_button "Create Ad" }
+        before { click_button "Save" }
         it { should have_content('Ad created!') }
       end
 
       describe "should have ad content" do
-        before { click_button "Create Ad" }
+        before { click_button "Save" }
         it { should have_content('Unique title for unique ad') }
       end
 
       describe "should redirect to current user page" do
-        before { click_button "Create Ad" }
+        before { click_button "Save" }
         it { should have_content( user.name ) }
       end
     end
