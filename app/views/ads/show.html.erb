@@ -5,6 +5,7 @@
     <h1><%= @ad.title %></h1>
     <p><%= @ad.description %></p>
     <p>
+      <span class="label"><%= @ad.state %></span>
       Created by
       <% if can? :read, @users %>
         <%= link_to @ad.user.name, user_path(@ad.user) %> <%= time_ago_in_words(@ad.created_at) %>
@@ -15,6 +16,7 @@
     </p>
     <p>
       <% if can? :update, @ad %>
+        <%= link_to "verify", ad_path(@ad, state: @ad.verify), class: 'btn btn-success'  %>
         <%= link_to "edit", edit_ad_path(@ad), class: "btn btn-primary"  %>
       <% end %>
       <% if can? :destroy, @ad %>

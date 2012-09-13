@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120911165304) do
+ActiveRecord::Schema.define(:version => 20120912161147) do
 
   create_table "ads", :force => true do |t|
     t.string   "title"
@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(:version => 20120911165304) do
     t.integer  "user_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.string   "state"
   end
 
   add_index "ads", ["user_id", "created_at"], :name => "index_ads_on_user_id_and_created_at"

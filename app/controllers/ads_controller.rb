@@ -9,7 +9,7 @@ class AdsController < ApplicationController
     @ad = current_user.ads.build(params[:ad])
     if @ad.save
       flash[:success] = "Ad created!"
-      redirect_to current_user
+      render 'show'
     else
       flash.now[:error] = "Ad not created!"
       render 'new'
@@ -19,7 +19,7 @@ class AdsController < ApplicationController
   def update
     if @ad.update_attributes(params[:ad])
       flash[:success] = "Ad updated!"
-      redirect_to current_user
+      render 'show'
     else
       flash.now[:error] = "Ad not updated!"
       render 'edit'
