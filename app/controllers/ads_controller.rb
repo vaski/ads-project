@@ -9,7 +9,7 @@ class AdsController < ApplicationController
     @ad = current_user.ads.build(params[:ad])
     if @ad.save
       flash[:success] = "Ad created!"
-      render 'show'
+      redirect_to @ad
     else
       flash.now[:error] = "Ad not created!"
       render 'new'
@@ -30,5 +30,20 @@ class AdsController < ApplicationController
     @ad.destroy
     flash[:notice] = "Successfuly destroyed ad!"
     redirect_to current_user
+  end
+
+  def verify
+    @ad.verify
+    render 'show'
+  end
+
+  def approve
+    @ad.approve
+    render 'show'
+  end
+
+  def reject
+    @ad.reject
+    render 'show'
   end
 end

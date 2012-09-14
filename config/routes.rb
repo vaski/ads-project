@@ -6,6 +6,9 @@ AdsProject::Application.routes.draw do
   resources :ads
 
   root to: 'ads#index'
+  get '/ads/:id/verify' => 'ads#verify', as: 'verify'
+  get '/ads/:id/approve' => 'ads#approve', as: 'approve'
+  get '/ads/:id/reject' => 'ads#reject', as: 'reject'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

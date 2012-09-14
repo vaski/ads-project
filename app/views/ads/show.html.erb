@@ -12,11 +12,17 @@
       <% else %>
         <%= @ad.user.name %> <%= time_ago_in_words(@ad.created_at) %>
       <% end %>
-      ago
+      ago. Updated <%= time_ago_in_words(@ad.updated_at) %> ago.
     </p>
     <p>
+      <% if (@ad.state == 'draft') && (can? :verify, @ad) %>
+        <%= link_to "verify", verify_path(@ad), class: 'btn btn-success'  %>
+      <% end %>
+      <% if (@ad.state == 'verified') && (can? :approve, @ad) %>
+        <%= link_to "approve", approve_path, class: 'btn btn-success'  %>
+        <%= link_to "reject", reject_path, class: 'btn btn-warning' %>
+      <% end %>
       <% if can? :update, @ad %>
-        <%= link_to "verify", ad_path(@ad, state: @ad.verify), class: 'btn btn-success'  %>
         <%= link_to "edit", edit_ad_path(@ad), class: "btn btn-primary"  %>
       <% end %>
       <% if can? :destroy, @ad %>

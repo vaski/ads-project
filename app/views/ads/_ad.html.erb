@@ -4,7 +4,7 @@
     <p><%= ad.description %></p>
     <p>
       <span class="label"><%= ad.state %></span>
-      Created <%= time_ago_in_words(ad.created_at) %> ago</p>
+      Updated <%= time_ago_in_words(ad.updated_at) %> ago</p>
     <p>
       <% if can? :update, ad %>
         <%= link_to "edit", edit_ad_path(ad), class: 'btn btn-mini btn-primary'  %>

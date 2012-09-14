@@ -1,15 +1,11 @@
 <% provide(:title, @user.name) %>
 <h1 class="header"><%= @user.name %></h1>
 <div class="row">
-  <div class="span6">
+  <div class="span8 offset2">
     <%= render partial: 'user_info' %>
-  </div>
-  <div class="span6">
-    <h3 class="center">New Ad</h3>
-    <div class="center hero-unit hero-ad">
-      <p>For create new ad push the button</p>
+    <% if can? :create, Ad %>
       <%= link_to "Create new ad!", new_ad_path, class: "btn btn-large btn-primary" %>
-    </div>
+    <% end %>
   </div>
 </div>
 

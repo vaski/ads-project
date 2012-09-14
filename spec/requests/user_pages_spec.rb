@@ -60,9 +60,6 @@ describe "User pages" do
     describe "Account page" do
       let(:admin) { FactoryGirl.create(:admin) }
 
-      let!(:ad1) { FactoryGirl.create(:ad, user: admin, title: "First Ad", description: "Lorem ipsum") }
-      let!(:ad2) { FactoryGirl.create(:ad, user: admin, title: "Second Ad", description: "Sed nisi ligula") }
-
       before do
         user_sign_in(admin)
         visit user_path(admin)
@@ -70,40 +67,10 @@ describe "User pages" do
 
       it { should have_selector('h1', text: admin.name) }
       it { should have_selector('title', text: admin.name) }
-      it { should have_selector('a', text: "Create new ad!") }
 
       it { should have_content(admin.id) }
       it { should have_content(admin.email) }
       it { should have_content(admin.role) }
-      it { should have_content(admin.ads.count) }
-
-      describe "ads list" do
-        it { should have_content(ad1.title) }
-        it { should have_content(ad1.description) }
-        it { should have_content(ad2.title) }
-        it { should have_content(ad2.description) }
-        it { should have_selector('a', text: "edit")}
-        it { should have_selector('a', text: "delete")}
-
-        describe "creating ad" do
-          before { click_link 'Create new ad!' }
-          it { should have_selector('h1', text: 'New ad') }
-        end
-
-        describe "updating ad" do
-          before { click_link 'edit' }
-          it { should have_selector('h1', text: 'Edit ad') }
-        end
-
-        describe "deleting ad" do
-          before { click_link 'delete' }
-          it { should have_selector('div', text: 'Successfuly destroyed ad!' ) }
-        end
-
-        it "should delete a ad" do
-          expect { click_link 'delete' }.to change(Ad, :count).by(-1)
-        end
-      end
     end
 
     describe "Index page" do
