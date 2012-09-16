@@ -11,10 +11,12 @@ class Ability
       can [:destroy, :approve, :reject], Ad
     else
       can :read, Ad
+      can :read, Image
 
       if user.role == 'user'
         can :read, User, id: user.id
         can :create, Ad
+        can :mamage, Image
         can [:update, :destroy, :verify], Ad, user_id: user.id
       end
     end

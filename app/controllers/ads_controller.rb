@@ -2,7 +2,8 @@ class AdsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @ads = @ads.paginate(page: params[:page])
+    @ads = @ads.where(state: 'published').paginate(page: params[:page],
+                                                   include: :images)
   end
 
   def create
@@ -16,10 +17,14 @@ class AdsController < ApplicationController
     end
   end
 
+  def new
+    @ad.images.build
+  end
+
   def update
     if @ad.update_attributes(params[:ad])
       flash[:success] = "Ad updated!"
-      render 'show'
+      redirect_to ad_path
     else
       flash.now[:error] = "Ad not updated!"
       render 'edit'

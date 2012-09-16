@@ -3,10 +3,16 @@
 <div class="row">
   <div class="span6 offset3">
     <h1><%= controller.action_name.humanize + " ad" %></h1>
-    <%= simple_form_for @ad do |f| %>
+    <%= simple_nested_form_for @ad do |f| %>
       <fieldset>
         <%= f.input :title, required: false, autofocus: true, input_html: { class: "span6" } %>
         <%= f.input :description, required: false, input_html: { class: "span6", rows: 5 }  %>
+
+        <%= f.simple_fields_for :images do |i| %>
+          <%= i.input :image_url, input_html: { class: "span6" } %>
+          <p><%= i.link_to_remove "Remove image", class: "btn btn-mini btn-danger" %></p>
+        <% end %>
+        <p><%= f.link_to_add "Add image", :images, class: "btn btn-mini btn-primary" %></p>
 
         <%= f.button :submit, "Save", class: "btn-primary" %>
         <%= link_to "Cancel", current_user, class: "btn" %>

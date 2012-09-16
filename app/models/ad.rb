@@ -12,9 +12,10 @@
 #
 
 class Ad < ActiveRecord::Base
-  attr_accessible :description, :title
-
+  attr_accessible :description, :title, :images_attributes
   belongs_to :user
+  has_many :images, dependent: :destroy, autosave: :true
+  accepts_nested_attributes_for :images, allow_destroy: true
 
   validates :title, presence: true,
                     length: { maximum: 80 }

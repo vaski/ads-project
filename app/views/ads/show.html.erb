@@ -3,6 +3,9 @@
 <div class="row">
   <div class="span12">
     <h1><%= @ad.title %></h1>
+    <% @ad.images.each do |img| %>
+      <%= image_tag(img.image_url, class: 'center') %>
+    <% end %>
     <p><%= @ad.description %></p>
     <p>
       <span class="label"><%= @ad.state %></span>

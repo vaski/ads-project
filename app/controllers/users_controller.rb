@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @ads = @user.ads.paginate(page: params[:page])
+    @ads = @user.ads.paginate(page: params[:page], include: :images)
   end
 
   def destroy

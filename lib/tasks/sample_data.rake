@@ -13,12 +13,23 @@ namespace :db do
     end
 
     users = User.all(limit: 5)
-    30.times do
+    5.times do
       title = Faker::Lorem.sentence(3)
       description = Faker::Lorem.sentence(25)
       users.each do |user|
         user.ads.create!(title: title,
                          description: description)
+      end
+    end
+
+    images = ['01','02','03','04','05','06','07','08','09','10']
+    ads = Ad.all
+    ads.each do |ad|
+      ad.state = 'published'
+      ad.save
+      3.times do
+        image = 'cow' + images.sample + '.png'
+        ad.images.create!(image_url: image)
       end
     end
 

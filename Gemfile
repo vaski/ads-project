@@ -10,6 +10,7 @@ gem 'bootstrap-sass'
 gem 'will_paginate', '~> 3.0'
 gem 'bootstrap-will_paginate'
 gem 'simple_form'
+gem 'nested_form'
 
 group :development, :test do
   gem 'rspec-rails', '~> 2.0'

@@ -1,4 +1,8 @@
 <tr>
+<td>
+    <% img = ad.images.first %>
+    <%= image_tag(img.image_url, class: 'center') %>
+</td>
   <td>
     <h3><%= link_to ad.title, ad_path(ad) %></h3>
     <p><%= ad.description %></p>
