@@ -7,6 +7,11 @@
         </div>
         <div class="span10">
           <h2><%= link_to ad.title, ad_path(ad) %></h2>
+          <p> Categories:
+          <% ad.categories.each do |category| %>
+            <span class="label label-info"><%= category.category_name %></span>
+          <% end %>
+          </p>
           <p><%= ad.description %></p>
           <p><span class="label"><%= ad.state %></span> Updated <%= time_ago_in_words(ad.updated_at) %> ago</p>
           <% if can? :update, ad %>

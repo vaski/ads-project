@@ -12,9 +12,11 @@
 #
 
 class Ad < ActiveRecord::Base
-  attr_accessible :description, :title, :images_attributes
+  attr_accessible :description, :title, :images_attributes, :category_ids
   belongs_to :user
   has_many :images, dependent: :destroy, autosave: :true
+  has_many :categorizations, dependent: :destroy, autosave: :true
+  has_many :categories, through: :categorizations
   accepts_nested_attributes_for :images, allow_destroy: true
 
   validates :title, presence: true,

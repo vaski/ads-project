@@ -24,8 +24,12 @@ describe Ad do
   it { should respond_to(:state) }
   it { should respond_to(:user) }
   it { should respond_to(:images) }
+  it { should respond_to(:categories) }
+  it { should_not respond_to(:categorization) }
   it { should belong_to(:user) }
   it { should have_many(:images) }
+  it { should have_many(:categories) }
+  it { should have_many(:categorizations) }
   it { should_not allow_mass_assignment_of(:id) }
   it { should_not allow_mass_assignment_of(:user_id) }
   it { should_not allow_mass_assignment_of(:created_at) }
@@ -34,6 +38,7 @@ describe Ad do
   it { should allow_mass_assignment_of(:title) }
   it { should allow_mass_assignment_of(:description) }
   it { should allow_mass_assignment_of(:images_attributes) }
+  it { should allow_mass_assignment_of(:category_ids) }
   it { should validate_presence_of(:title) }
   it { should_not allow_value('a' * 81).for(:title) }
   it { should_not allow_value('').for(:title) }

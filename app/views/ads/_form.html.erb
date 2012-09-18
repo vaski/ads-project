@@ -6,6 +6,7 @@
             <fieldset>
               <%= f.input :title, required: false, autofocus: true, input_html: { class: "span6" } %>
               <%= f.input :description, required: false, input_html: { class: "span6", rows: 5 }  %>
+              <%= f.collection_check_boxes :category_ids, Category.all, :id, :category_name %>
 
               <%= f.simple_fields_for :images do |i| %>
                 <%= i.input :image_url, required: false, input_html: { class: "span6" } %>

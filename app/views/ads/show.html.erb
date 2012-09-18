@@ -2,6 +2,11 @@
       <div class="row">
         <div class="span12">
           <h1><%= @ad.title %></h1>
+          <p> Categories:
+          <% @ad.categories.each do |category| %>
+            <span class="label label-info"><%= category.category_name %></span>
+          <% end %>
+          </p>
           <div id="images">
           <% @ad.images.each do |img| %>
             <%= image_tag(img.image_url, class: 'center') %>

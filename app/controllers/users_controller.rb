@@ -8,7 +8,7 @@ class UsersController < ApplicationController
   def show
     @ads = @user.ads.paginate(page: params[:page],
                               per_page: 5,
-                              include: :images)
+                              include: [:images, :categories])
   end
 
   def destroy
