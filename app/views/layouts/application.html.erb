@@ -1,23 +1,25 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <%= render 'layouts/head' %>
-</head>
-<body>
-  <%= render 'layouts/navbar' %>
-  <div class="container">
-    <%= render 'layouts/flash_notice' %>
-
-    <section id="main-content">
-      <%= yield %>
-    </section>
-
-    <footer class="footer">
-      <p class="pull-right"><%= link_to "Back to top", "#" %></p>
-      <p><%= link_to "ADS project", root_path %></p>
-
-      <%= render 'layouts/debug' %>
-    </footer>
-  </div>
-</body>
+  <head>
+    <title>ADS project | <%= yield(:title) %></title>
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <%= stylesheet_link_tag "application", media: "all" %>
+    <%= javascript_include_tag "application" %>
+    <%= csrf_meta_tags %>
+    <%= favicon_link_tag %>
+  </head>
+  <body>
+<%= render 'layouts/navbar' %>
+    <div class="container">
+<%= render 'layouts/flash_notice' %>
+<%= yield %>
+      <footer class="footer">
+        <p class="pull-right"><%= link_to "Back to top", "#" %></p>
+        <p><%= link_to "ADS project", root_path %></p>
+<%= render 'layouts/debug' %>
+      </footer>
+    </div>
+  </body>
 </html>

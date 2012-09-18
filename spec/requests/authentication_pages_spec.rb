@@ -45,7 +45,7 @@ describe "Authentication" do
     end
 
     it "should have the right title" do
-     page.should have_selector('title', :text => "ADS project | Sign up")
+     page.should have_selector('title', text: "ADS project | Sign up")
     end
 
     let(:submit) { "Sign up" }

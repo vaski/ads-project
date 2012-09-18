@@ -3,6 +3,7 @@ class AdsController < ApplicationController
 
   def index
     @ads = @ads.where(state: 'published').paginate(page: params[:page],
+                                                   per_page: 5,
                                                    include: :images)
   end
 

@@ -25,6 +25,7 @@ describe "Ad pages" do
       before do
         fill_in 'ad_title', with: "Unique title for unique ad"
         fill_in 'ad_description', with: "Lorem ipsum dolor"
+        fill_in 'ad_images_attributes_0_image_url', with: "cow01.png"
       end
 
       it "should create an ad" do

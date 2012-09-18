@@ -5,11 +5,13 @@ AdsProject::Application.routes.draw do
   resources :users, only: [:show, :index, :destroy]
   resources :ads
 
-  root to: 'ads#index'
-  get '/ads/:id/verify' => 'ads#verify', as: 'verify'
-  get '/ads/:id/approve' => 'ads#approve', as: 'approve'
-  get '/ads/:id/reject' => 'ads#reject', as: 'reject'
+  get '/ads/:id/verify', to: 'ads#verify', as: 'verify'
+  get '/ads/:id/approve', to: 'ads#approve', as: 'approve'
+  get '/ads/:id/reject', to: 'ads#reject', as: 'reject'
 
+  get '/verified_ads', to: 'pages#verified_ads'
+
+  root to: 'ads#index'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

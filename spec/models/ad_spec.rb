@@ -15,50 +15,40 @@ require 'spec_helper'
 
 describe Ad do
 
-  let(:user) { FactoryGirl.create(:user) }
-  before { @ad = user.ads.build(title: "Lorem", description: "Lorem ipsum") }
-
-  subject { @ad }
-
   it { should respond_to(:id) }
   it { should respond_to(:title) }
   it { should respond_to(:description) }
   it { should respond_to(:user_id) }
   it { should respond_to(:created_at) }
   it { should respond_to(:updated_at) }
-
+  it { should respond_to(:state) }
   it { should respond_to(:user) }
-  its(:user) { should == user }
+  it { should respond_to(:images) }
+  it { should belong_to(:user) }
+  it { should have_many(:images) }
+  it { should_not allow_mass_assignment_of(:id) }
+  it { should_not allow_mass_assignment_of(:user_id) }
+  it { should_not allow_mass_assignment_of(:created_at) }
+  it { should_not allow_mass_assignment_of(:updated_at) }
+  it { should_not allow_mass_assignment_of(:state) }
+  it { should allow_mass_assignment_of(:title) }
+  it { should allow_mass_assignment_of(:description) }
+  it { should allow_mass_assignment_of(:images_attributes) }
+  it { should validate_presence_of(:title) }
+  it { should_not allow_value('a' * 81).for(:title) }
+  it { should_not allow_value('').for(:title) }
+  it { should_not allow_value(nil).for(:title) }
+  it { should allow_value('Ad title').for(:title) }
+  it { should validate_presence_of(:description) }
+  it { should_not allow_value('a' * 501).for(:description) }
+  it { should_not allow_value('').for(:description) }
+  it { should_not allow_value(nil).for(:description) }
+  it { should allow_value('Ad description').for(:description) }
 
-  it { should be_valid }
+  describe 'default state' do
+    let(:user) { FactoryGirl.build(:user) }
+    before { @ad = user.ads.build(title: 'Title', description: 'Description') }
 
-  describe "when user_id is not present" do
-    before { @ad.user_id = nil }
-    it { should_not be_valid }
-  end
-
-  describe "with blank title" do
-    before { @ad.title = " " }
-    it { should_not be_valid }
-  end
-
-  describe "when title is nil" do
-    before { @ad.title = nil }
-    it { should_not be_valid }
-  end
-
-  describe "with title that is too long" do
-    before { @ad.title = "a" * 81 }
-    it { should_not be_valid }
-  end
-
-  describe "with blank description" do
-    before { @ad.description = " " }
-    it { should_not be_valid }
-  end
-
-  describe "when description is nil" do
-    before { @ad.title = nil }
-    it { should_not be_valid }
+    it { @ad.state.should == 'draft' }
   end
 end

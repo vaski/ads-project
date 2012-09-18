@@ -1,9 +1,10 @@
 FactoryGirl.define do
   factory :user do
-    sequence(:name) { |n| "Person #{n}" }
+    sequence(:name) { |n| "User #{n}" }
     sequence(:email) { |n| "email_#{n}@ads.com" }
     password              "password"
     password_confirmation "password"
+    remember_me           0
 
     factory :admin do
       name                  "Admin"
@@ -15,8 +16,13 @@ FactoryGirl.define do
   end
 
   factory :ad do
-    title "Lorem ipsum"
-    description "Lorem ipsum dolor sit amet"
+    title "Ad title"
+    description "Ad description"
     user
+  end
+
+  factory :image do
+    image_url "cow01.png"
+    ad
   end
 end

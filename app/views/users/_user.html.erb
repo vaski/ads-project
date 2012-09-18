@@ -1,8 +1,8 @@
-<tr>
-  <td><%= link_to user.name, user %></td>
-  <td>
-    <% if can? :manage, User %>
-      <%= link_to "Delete", user, method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-mini btn-danger pull-right' %>
-    <% end %>
-  </td>
-</tr>
+            <tr>
+              <td><%= link_to user.name, user %></td>
+              <td>
+              <% if can? :manage, User %>
+                <%= link_to "Delete", user, method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-mini btn-danger pull-right' %>
+              <% end %>
+              </td>
+            </tr>

@@ -1,24 +1,18 @@
 <% provide(:title, @user.name) %>
-<h1 class="header"><%= @user.name %></h1>
-<div class="row">
-  <div class="span8 offset2">
-    <%= render partial: 'user_info' %>
-    <% if can? :create, Ad %>
-      <%= link_to "Create new ad!", new_ad_path, class: "btn btn-large btn-primary" %>
-    <% end %>
-  </div>
-</div>
+      <h1 class="header"><%= @user.name %></h1>
+      <div class="row">
+        <div class="span8 offset2">
+<%= render partial: 'user_info' %>
+        <% if can? :create, Ad %>
+          <%= link_to "Create new ad!", new_ad_path, class: "btn btn-large btn-primary" %>
+        <% end %>
+        </div>
+      </div>
 
 <% if @ads.any? %>
-<div class="row">
-  <div class="span12">
-    <h2 class="center">List of ads</h2>
-    <% @ads.each do |ad| %>
-      <table class="table">
-        <%= render ad %>
-      </table>
-    <% end %>
-    <%= will_paginate @ads %>
-  </div>
-</div>
+      <h2 class="center">List of ads</h2>
+      <% @ads.each do |ad| %>
+<%= render ad %>
+      <% end %>
+      <%= will_paginate @ads %>
 <% end %>

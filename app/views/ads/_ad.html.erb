@@ -1,21 +1,19 @@
-<tr>
-<td>
-    <% img = ad.images.first %>
-    <%= image_tag(img.image_url, class: 'center') %>
-</td>
-  <td>
-    <h3><%= link_to ad.title, ad_path(ad) %></h3>
-    <p><%= ad.description %></p>
-    <p>
-      <span class="label"><%= ad.state %></span>
-      Updated <%= time_ago_in_words(ad.updated_at) %> ago</p>
-    <p>
-      <% if can? :update, ad %>
-        <%= link_to "edit", edit_ad_path(ad), class: 'btn btn-mini btn-primary'  %>
-      <% end %>
-      <% if can? :destroy, ad %>
-        <%= link_to "delete", ad, method: :delete, data: { confirm: "You sure want to delete ad?" }, title: ad.title, class: "btn btn-mini btn-danger" %>
-      <% end %>
-    </p>
-  </td>
-</tr>
+      <div class="row" id="ad">
+        <div class="span2">
+        <% if ad.images.any? %>
+          <% img = ad.images.first %>
+          <%= image_tag(img.image_url, class: 'center') %>
+        <% end %>
+        </div>
+        <div class="span10">
+          <h2><%= link_to ad.title, ad_path(ad) %></h2>
+          <p><%= ad.description %></p>
+          <p><span class="label"><%= ad.state %></span> Updated <%= time_ago_in_words(ad.updated_at) %> ago</p>
+          <% if can? :update, ad %>
+          <%= link_to "edit", edit_ad_path(ad), class: 'btn btn-mini btn-primary'  %>
+          <% end %>
+          <% if can? :destroy, ad %>
+          <%= link_to "delete", ad, method: :delete, data: { confirm: "You sure want to delete ad?" }, title: ad.title, class: "btn btn-mini btn-danger" %>
+          <% end %>
+        </div>
+      </div>

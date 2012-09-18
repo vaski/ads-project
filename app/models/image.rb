@@ -13,6 +13,10 @@ class Image < ActiveRecord::Base
   attr_accessible :image_url
   belongs_to :ad
 
+  validates :image_url, presence: true,
+    format: { with: %r{\.(png|jpg|gif)$}i,
+              message: 'must be a URL for PNG, JPG or GIF image.'}
+
   after_save do |img|
     img.ad.refresh
   end

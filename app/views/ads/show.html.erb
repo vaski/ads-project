@@ -1,36 +1,33 @@
 <% provide(:title, @ad.title) %>
-
-<div class="row">
-  <div class="span12">
-    <h1><%= @ad.title %></h1>
-    <% @ad.images.each do |img| %>
-      <%= image_tag(img.image_url, class: 'center') %>
-    <% end %>
-    <p><%= @ad.description %></p>
-    <p>
-      <span class="label"><%= @ad.state %></span>
-      Created by
-      <% if can? :read, @users %>
-        <%= link_to @ad.user.name, user_path(@ad.user) %> <%= time_ago_in_words(@ad.created_at) %>
-      <% else %>
-        <%= @ad.user.name %> <%= time_ago_in_words(@ad.created_at) %>
-      <% end %>
-      ago. Updated <%= time_ago_in_words(@ad.updated_at) %> ago.
-    </p>
-    <p>
-      <% if (@ad.state == 'draft') && (can? :verify, @ad) %>
-        <%= link_to "verify", verify_path(@ad), class: 'btn btn-success'  %>
-      <% end %>
-      <% if (@ad.state == 'verified') && (can? :approve, @ad) %>
-        <%= link_to "approve", approve_path, class: 'btn btn-success'  %>
-        <%= link_to "reject", reject_path, class: 'btn btn-warning' %>
-      <% end %>
-      <% if can? :update, @ad %>
-        <%= link_to "edit", edit_ad_path(@ad), class: "btn btn-primary"  %>
-      <% end %>
-      <% if can? :destroy, @ad %>
-        <%= link_to "delete", @ad, method: :delete, data: { confirm: "You sure want to delete ad?" }, class: "btn btn-danger" %>
-      <% end %>
-    </p>
-  </div>
-</div>
+      <div class="row">
+        <div class="span12">
+          <h1><%= @ad.title %></h1>
+          <div id="images">
+          <% @ad.images.each do |img| %>
+            <%= image_tag(img.image_url, class: 'center') %>
+          <% end %>
+          </div>
+          <p><%= @ad.description %></p>
+          <p><span class="label"><%= @ad.state %></span> Created by
+        <% if can? :read, @users %>
+          <%= link_to @ad.user.name, user_path(@ad.user) %> <%= time_ago_in_words(@ad.created_at) %>
+        <% else %>
+          <%= @ad.user.name %> <%= time_ago_in_words(@ad.created_at) %>
+        <% end %>
+          ago. Updated <%= time_ago_in_words(@ad.updated_at) %> ago.
+          </p>
+        <% if (@ad.state == 'draft') && (can? :verify, @ad) %>
+          <%= link_to "verify", verify_path(@ad), class: 'btn btn-success'  %>
+        <% end %>
+        <% if (@ad.state == 'verified') && (can? :approve, @ad) %>
+          <%= link_to "approve", approve_path, class: 'btn btn-success'  %>
+          <%= link_to "reject", reject_path, class: 'btn btn-warning' %>
+        <% end %>
+        <% if can? :update, @ad %>
+          <%= link_to "edit", edit_ad_path(@ad), class: "btn btn-primary"  %>
+        <% end %>
+        <% if can? :destroy, @ad %>
+          <%= link_to "delete", @ad, method: :delete, data: { confirm: "You sure want to delete ad?" }, class: "btn btn-danger" %>
+        <% end %>
+        </div>
+      </div>

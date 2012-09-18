@@ -20,7 +20,8 @@ class Ad < ActiveRecord::Base
   validates :title, presence: true,
                     length: { maximum: 80 }
 
-  validates :description, presence: true
+  validates :description, presence: true,
+                          length: { maximum: 500 }
 
   validates :user_id, presence: true
 

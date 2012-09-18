@@ -48,6 +48,7 @@ pre {
 
 .navbar .brand {
   font-weight: bold;
+  color: #555555;
 }
 
 .adslist {
@@ -62,4 +63,18 @@ pre {
 .hero-ad {
   background-color: #ffffff;
   padding: 20px;
+}
+
+#ad {
+  margin-bottom: 20px;
+  border-top: 1px solid #e5e5e5;
+}
+
+#ad h2 {
+  font-size: 20px;
+  line-height: 30px;
+}
+
+#images {
+  margin-bottom: 20px;
 }

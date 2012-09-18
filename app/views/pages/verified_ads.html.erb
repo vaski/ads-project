@@ -1,0 +1,10 @@
+<% provide(:title, 'Verified ads') %>
+<% if @ads.any? %>
+      <h1>Verified ads</h1>
+  <% @ads.each do |ad| %>
+<%= render ad %>
+  <% end %>
+      <%= will_paginate @ads %>
+<% else %>
+      <h1>No more verified ads:)</h1>
+<% end %>
