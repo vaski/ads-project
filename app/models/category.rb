@@ -14,6 +14,7 @@ class Category < ActiveRecord::Base
   has_many :ads, through: :categorizations
 
   validates :category_name, presence: true,
-                    length: { maximum: 80 }
+                    length: { maximum: 80 },
+                    uniqueness: true
 
 end

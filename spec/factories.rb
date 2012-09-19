@@ -25,4 +25,8 @@ FactoryGirl.define do
     image_url "cow01.png"
     ad
   end
+
+  factory :category do
+    category_name "Cows"
+  end
 end

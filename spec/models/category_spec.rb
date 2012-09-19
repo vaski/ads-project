@@ -28,5 +28,14 @@ describe Category do
   it { should_not allow_value('a' * 81).for(:category_name) }
   it { should_not allow_value('').for(:category_name) }
   it { should_not allow_value(nil).for(:category_name) }
-  it { should allow_value('toys and games').for(:category_name) }
+  it { should allow_value('Cows').for(:category_name) }
+
+  describe "when category_name is alredy taken" do
+    let(:category) { FactoryGirl.build(:category) }
+    before do
+      same_category = category.dup
+    end
+
+    it { should_not be_valid }
+  end
 end

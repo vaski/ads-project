@@ -4,6 +4,7 @@ AdsProject::Application.routes.draw do
 
   resources :users, only: [:show, :index, :destroy]
   resources :ads
+  resources :categories, except: :show
 
   get '/ads/:id/verify', to: 'ads#verify', as: 'verify'
   get '/ads/:id/approve', to: 'ads#approve', as: 'approve'

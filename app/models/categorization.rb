@@ -20,9 +20,4 @@ class Categorization < ActiveRecord::Base
   after_save do |ctg|
     ctg.ad.refresh
   end
-
-  after_destroy do |ctg|
-    ctg.ad.refresh
-  end
-
 end

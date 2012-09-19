@@ -1,0 +1,13 @@
+            <tr>
+              <td><%= category.category_name %></td>
+              <td>
+                <p class="right">
+                <% if ( !category.categorizations.any? ) && (can? :delete, category) %>
+                  <%= link_to "Delete", category, method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-mini btn-danger' %>
+                <% end %>
+                <% if can? :update, category %>
+                  <%= link_to "edit", edit_category_path(category), class: 'btn btn-mini btn-primary'  %>
+                <% end %>
+                </p>
+              </td>
+            </tr>

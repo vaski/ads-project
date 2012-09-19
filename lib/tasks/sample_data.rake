@@ -24,7 +24,9 @@ namespace :db do
 
     images = ['01','02','03','04','05','06','07','08','09','10']
     ads = Ad.all
+    category = Category.create!(category_name: 'Cows')
     ads.each do |ad|
+      ad.categorizations.create!(category_id: category.id)
       3.times do
         image = 'cow' + images.sample + '.png'
         ad.images.create!(image_url: image)
