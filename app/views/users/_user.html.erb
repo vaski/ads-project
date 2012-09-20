@@ -1,8 +1,22 @@
             <tr>
-              <td><%= link_to user.name, user %></td>
               <td>
-              <% if can? :manage, User %>
-                <%= link_to "Delete", user, method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-mini btn-danger pull-right' %>
-              <% end %>
+                <p>
+                  <%= link_to user.name, user %>
+                  <% if user.role == 'admin' %>
+                    <span class="label label-important"><%= user.role %></span>
+                  <% else %>
+                    <span class="label label-success"><%= user.role %></span>
+                  <% end %>
+                </p>
+              </td>
+              <td>
+                <p class="right">
+                <% if (can? :destroy, User) && (user != current_user) %>
+                  <%= link_to "Delete", user, method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-mini btn-danger' %>
+                <% end %>
+                <% if can? :update, User %>
+                  <%= link_to "Change role", edit_user_path(user), class: 'btn btn-mini btn-primary'  %>
+                <% end %>
+                </p>
               </td>
             </tr>

@@ -89,7 +89,7 @@ describe User do
     end
 
     describe 'ad associations' do
-      let(:ad) { FactoryGirl.build(:ad, user: user) }
+      let(:ad) { FactoryGirl.create(:ad, user: user) }
 
       it 'should destroy associated ads' do
         ads = user.ads

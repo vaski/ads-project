@@ -7,16 +7,19 @@ class Ability
 
     if user.role == 'admin'
       can :read, :all
-      can :manage, User
-      can :manage, Category
+      can [:create, :update, :assign_role], User
+      can :destroy, User do |usr|
+        user.id != usr.id
+      end
       can [:destroy, :approve, :reject], Ad
+      can :manage, Category
     else
-      can :read, Ad
+      can :read, Ad, state: 'published'
 
       if user.role == 'user'
         can :read, User, id: user.id
         can :create, Ad
-        can [:update, :destroy, :verify], Ad, user_id: user.id
+        can [:read, :update, :destroy, :verify], Ad, user_id: user.id
       end
     end
   end

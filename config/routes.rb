@@ -2,7 +2,7 @@ AdsProject::Application.routes.draw do
 
   devise_for :users, path_prefix: 'my'
 
-  resources :users, only: [:show, :index, :destroy]
+  resources :users
   resources :ads
   resources :categories, except: :show
 

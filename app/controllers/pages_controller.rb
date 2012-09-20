@@ -3,6 +3,6 @@ class PagesController < ApplicationController
     @ads = Ad.where(state: 'verified').paginate(page: params[:page],
                                                 per_page: 5,
                                                 include: [:images, :categories])
-    authorize! :manage, User
+    authorize! :create, Category
   end
 end

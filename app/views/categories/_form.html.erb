@@ -2,7 +2,7 @@
       <div class="row">
         <div class="span6 offset3">
           <h1><%= controller.action_name.humanize + " category" %></h1>
-          <%= simple_nested_form_for @category do |f| %>
+          <%= simple_form_for @category do |f| %>
             <fieldset>
               <%= f.input :category_name, required: false, autofocus: true, input_html: { class: "span6" } %>
 

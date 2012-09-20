@@ -1,0 +1,32 @@
+<% provide(:title, 'Change user role') %>
+      <div class="row">
+      <h1>Change user role</h1>
+
+        <div class="span6 offset3">
+          <h3 class="center">Account details</h3>
+
+          <table class="table table-striped table-bordered">
+            <tr>
+              <th>name:</th><td><%= @user.name %></td>
+            </tr>
+            <tr>
+              <th>id:</th><td><%= @user.id %></td>
+            </tr>
+            <tr>
+              <th>email:</th><td><%= @user.email %></td>
+            </tr>
+            <tr>
+              <th>Sign up date:</th><td><%= @user.created_at %></td>
+            </tr>
+          </table>
+
+          <%= simple_form_for @user do |f| %>
+            <div class="form-inputs">
+              <%= f.input :role, required: false, input_html: { class: 'span6' } %>
+            </div>
+
+            <%= f.button :submit, class: 'btn-primary' %>
+            <%= link_to 'Cancel', users_path, class: 'btn' %>
+          <% end %>
+        </div>
+      </div>

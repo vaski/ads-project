@@ -56,4 +56,32 @@ describe Ad do
 
     it { @ad.state.should == 'draft' }
   end
+
+  describe 'reset state if ad updated' do
+    let(:user) { FactoryGirl.create(:user) }
+    let(:ad) { FactoryGirl.create(:ad, user: user) }
+    before do
+      ad.state = 'verified'
+      ad.save
+    end
+
+    describe 'when title changed' do
+      before do
+        ad.title = 'Changed title'
+        ad.save
+      end
+
+      it { ad.state.should == 'draft' }
+    end
+
+    describe 'when description changed' do
+      before do
+        ad.description = 'Changed description'
+        ad.save
+      end
+
+      it { ad.state.should == 'draft' }
+    end
+
+  end
 end
