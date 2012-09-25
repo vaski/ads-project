@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  load_and_authorize_resource except: :create
-  skip_authorize_resource only: :index
+  load_and_authorize_resource
+  respond_to :html
 
   def index
     @users = @users.paginate(page: params[:page])
@@ -14,35 +14,19 @@ class UsersController < ApplicationController
   end
 
   def create
-    role_param = params[:user][:role]
-    params[:user].delete(:role)
-    @user = User.new(params[:user])
-    authorize! :create, @user
-    @user.role = role_param if can? :assign_role, @user
-    if @user.save
-      flash[:success] = "User created!"
-      redirect_to users_path
-    else
-      flash.now[:error] = "User not created!"
-      render 'new'
-    end
+    @user.role = params[:user][:role] if can? :assign_role, @user
+    flash[:success] = 'User created!' if @user.save
+    respond_with @user
   end
 
   def update
-    role_param = params[:user][:role]
-    @user.role = role_param if can? :assign_role, @user
-    if @user.update_attributes(params[@user])
-      flash[:success] = "User updated!"
-      redirect_to users_path
-    else
-      flash.now[:error] = "User not updated!"
-      render 'edit'
-    end
+    @user.role = params[:user][:role] if can? :assign_role, @user
+    flash[:success] = 'User updated!' if @user.save
+    respond_with @user
   end
 
   def destroy
     @user.destroy
-    flash[:success] = "User destroyed!"
-    redirect_to users_path
+    redirect_to users_path, notice: 'User destroyed!'
   end
 end

@@ -29,6 +29,9 @@ class Ad < ActiveRecord::Base
 
   default_scope order: 'ads.updated_at DESC'
 
+  scope :published, -> { where(state: 'published') }
+  scope :verified,  -> { where(state: 'verified') }
+
   before_save do |ad|
     ad.state = 'draft' if ad.title_changed? || ad.description_changed?
   end

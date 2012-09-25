@@ -20,6 +20,7 @@
 #
 
 class User < ActiveRecord::Base
+  include Enumerize
   before_create :set_role
 
   # Include default devise modules. Others available are:
@@ -38,6 +39,8 @@ class User < ActiveRecord::Base
   validates :name, presence: true, length: { maximum: 80 }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, format: { with: VALID_EMAIL_REGEX }
+
+  enumerize :role, in: [:user, :admin], default: :user
 
   private
 

@@ -13,11 +13,6 @@ describe "Ad pages" do
       it "should not create an ad" do
         expect { click_button "Save" }.not_to change(Ad, :count)
       end
-
-      describe "should have error message" do
-        before { click_button "Save" }
-        it { should have_content('Ad not created!') }
-      end
     end
 
     describe "with valid information" do

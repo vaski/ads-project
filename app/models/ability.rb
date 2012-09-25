@@ -5,10 +5,10 @@ class Ability
 
     user ||= User.new # guest user (not logged in)
 
-    if user.role == 'admin'
+    if user.role.admin?
       can :read, :all
-      can [:create, :update, :assign_role], User
-      can :destroy, User do |usr|
+      can :create, User
+      can [:destroy, :update, :assign_role], User do |usr|
         user.id != usr.id
       end
       can [:destroy, :approve, :reject], Ad
@@ -16,7 +16,7 @@ class Ability
     else
       can :read, Ad, state: 'published'
 
-      if user.role == 'user'
+      if user.role.user?
         can :read, User, id: user.id
         can :create, Ad
         can [:read, :update, :destroy, :verify], Ad, user_id: user.id

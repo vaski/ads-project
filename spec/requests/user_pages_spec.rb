@@ -91,7 +91,6 @@ describe "User pages" do
 
       it { should have_selector('title', text: 'All users') }
       it { should have_selector('h1', text: 'All users') }
-      it { should have_selector('a', text: 'Change role') }
       it { should have_link('Users', href: users_path) }
 
       describe "deleting user" do

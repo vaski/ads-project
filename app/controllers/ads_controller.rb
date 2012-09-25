@@ -1,21 +1,17 @@
 class AdsController < ApplicationController
   load_and_authorize_resource
+  respond_to :html
 
   def index
-    @ads = @ads.where(state: 'published').paginate(page: params[:page],
-                                                   per_page: 5,
-                                                   include: [:images, :categories] )
+    @ads = @ads.published.paginate(page: params[:page],
+                                   per_page: 5,
+                                   include: [:images, :categories] )
   end
 
   def create
     @ad = current_user.ads.build(params[:ad])
-    if @ad.save
-      flash[:success] = "Ad created!"
-      redirect_to @ad
-    else
-      flash.now[:error] = "Ad not created!"
-      render 'new'
-    end
+    flash[:success] = 'Ad created!' if @ad.save
+    respond_with @ad
   end
 
   def new
@@ -23,19 +19,13 @@ class AdsController < ApplicationController
   end
 
   def update
-    if @ad.update_attributes(params[:ad])
-      flash[:success] = "Ad updated!"
-      redirect_to ad_path
-    else
-      flash.now[:error] = "Ad not updated!"
-      render 'edit'
-    end
+    flash[:success] = 'Ad updated!' if @ad.update_attributes(params[:ad])
+    respond_with @ad
   end
 
   def destroy
     @ad.destroy
-    flash[:notice] = "Successfuly destroyed ad!"
-    redirect_to current_user
+    redirect_to current_user, notice: 'Successfuly destroyed ad!'
   end
 
   def verify

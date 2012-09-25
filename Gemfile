@@ -11,6 +11,7 @@ gem 'will_paginate', '~> 3.0'
 gem 'bootstrap-will_paginate'
 gem 'simple_form'
 gem 'nested_form'
+gem 'enumerize'
 
 group :development, :test do
   gem 'rspec-rails', '~> 2.0'
