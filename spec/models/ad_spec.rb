@@ -50,38 +50,15 @@ describe Ad do
   it { should_not allow_value(nil).for(:description) }
   it { should allow_value('Ad description').for(:description) }
 
-  describe 'default state' do
-    let(:user) { FactoryGirl.build(:user) }
-    before { @ad = user.ads.build(title: 'Title', description: 'Description') }
-
-    it { @ad.state.should == 'draft' }
-  end
-
   describe 'reset state if ad updated' do
-    let(:user) { FactoryGirl.create(:user) }
-    let(:ad) { FactoryGirl.create(:ad, user: user) }
-    before do
-      ad.state = 'verified'
-      ad.save
-    end
+    let(:ad) { FactoryGirl.create(:ad) }
+    before { ad.verify }
 
-    describe 'when title changed' do
-      before do
-        ad.title = 'Changed title'
-        ad.save
+    [:title, :description].each do |attr|
+      it "should reset state to 'draft' if #{attr} is changed" do
+        ad.update_attributes(attr => "Changed #{attr}")
+        ad.draft?.should be_true
       end
-
-      it { ad.state.should == 'draft' }
     end
-
-    describe 'when description changed' do
-      before do
-        ad.description = 'Changed description'
-        ad.save
-      end
-
-      it { ad.state.should == 'draft' }
-    end
-
   end
 end
