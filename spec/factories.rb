@@ -27,6 +27,6 @@ FactoryGirl.define do
   end
 
   factory :category do
-    category_name "Cows"
+    category_name "Category"
   end
 end

@@ -40,7 +40,7 @@ class User < ActiveRecord::Base
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, format: { with: VALID_EMAIL_REGEX }
 
-  enumerize :role, in: [:user, :admin], default: :user
+  enumerize :role, in: %w(user admin), predicates: true
 
   private
 

@@ -83,6 +83,8 @@ describe User do
   describe 'with valid data' do
     let(:user) { FactoryGirl.build(:user) }
 
+    it { user.role.should be_nil }
+
     describe "when password doesn't match confirmation" do
       before { user.password_confirmation = 'mismatch' }
       it { should_not be_valid }
